@@ -1,11 +1,11 @@
 package com.example.mvp_rxjava2_dagger_moxy
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.mvp_rxjava2_dagger_moxy.databinding.ActivityMainBinding
 import com.example.mvp_rxjava2_dagger_moxy.fragments.ClicksFragment
+import moxy.MvpAppCompatActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : MvpAppCompatActivity() {
 
     private var binding: ActivityMainBinding? = null
 
