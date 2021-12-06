@@ -1,4 +1,4 @@
-package com.example.mvp_rxjava2_dagger_moxy
+package com.example.mvp_rxjava2_dagger_moxy.mvp.interfaces
 
 interface MainView {
 

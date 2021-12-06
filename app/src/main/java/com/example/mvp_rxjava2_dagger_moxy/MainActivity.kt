@@ -3,6 +3,7 @@ package com.example.mvp_rxjava2_dagger_moxy
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.mvp_rxjava2_dagger_moxy.databinding.ActivityMainBinding
+import com.example.mvp_rxjava2_dagger_moxy.fragments.ClicksFragment
 
 class MainActivity : AppCompatActivity() {
 

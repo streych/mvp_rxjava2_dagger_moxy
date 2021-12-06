@@ -1,4 +1,6 @@
-package com.example.mvp_rxjava2_dagger_moxy
+package com.example.mvp_rxjava2_dagger_moxy.mvp
+
+import com.example.mvp_rxjava2_dagger_moxy.mvp.interfaces.MainView
 
 class Presenter(private val mainView: MainView) {
 

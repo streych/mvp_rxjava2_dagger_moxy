@@ -1,10 +1,12 @@
-package com.example.mvp_rxjava2_dagger_moxy
+package com.example.mvp_rxjava2_dagger_moxy.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.mvp_rxjava2_dagger_moxy.mvp.interfaces.MainView
+import com.example.mvp_rxjava2_dagger_moxy.mvp.Presenter
 import com.example.mvp_rxjava2_dagger_moxy.databinding.FragmentClicksBinding
 
 
