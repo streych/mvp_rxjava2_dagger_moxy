@@ -1,4 +1,4 @@
-package com.example.mvp_rxjava2_dagger_moxy.fragments
+package com.example.mvp_rxjava2_dagger_moxy.mvp
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,13 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.mvp_rxjava2_dagger_moxy.mvp.interfaces.MainView
-import com.example.mvp_rxjava2_dagger_moxy.mvp.Presenter
 import com.example.mvp_rxjava2_dagger_moxy.databinding.FragmentClicksBinding
+import moxy.MvpAppCompatFragment
+import moxy.ktx.moxyPresenter
 
 
-class ClicksFragment : Fragment(), MainView {
+class ClicksFragment : MvpAppCompatFragment(), MainView {
 
-    private val presenter = Presenter(this)
+    private val presenter by moxyPresenter {
+        Presenter()
+    }
     private var _binding: FragmentClicksBinding? = null
     private val binding get() = _binding!!
 
