@@ -1,4 +1,4 @@
-package com.example.mvp_rxjava2_dagger_moxy.mvp
+package com.example.mvp_rxjava2_dagger_moxy.mvp.users_mvp.presenter.model
 
 class Model {
 
