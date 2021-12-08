@@ -20,7 +20,7 @@ class AutorizationPresenter(private val router: Router, private val screens: ISc
         if (login.isEmpty() || password.isEmpty()) {
             viewState.messageInfo("Где логин / пароль")
         } else {
-            val unswer = model.getUser(login, password)
+            val unswer = model.isLoginPasswordExist(login, password)
             if (unswer) {
                 val user = Users(login, password)
                 goToSingIn(user)

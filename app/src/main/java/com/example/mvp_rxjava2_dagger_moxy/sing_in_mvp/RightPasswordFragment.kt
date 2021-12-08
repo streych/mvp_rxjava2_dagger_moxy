@@ -34,7 +34,7 @@ class RightPasswordFragment : MvpAppCompatFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-         val loginBundle: Users = arguments?.getParcelable(BUNDLE_EXTRA) ?: Users()
+        val loginBundle: Users = arguments?.getParcelable(BUNDLE_EXTRA) ?: Users()
         binding.loginRP.text = loginBundle.login
     }
 

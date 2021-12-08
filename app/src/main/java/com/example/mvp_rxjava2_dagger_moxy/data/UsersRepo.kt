@@ -7,7 +7,7 @@ class UsersRepo {
         Users("Parovoz","654321")
     )
 
-    fun getUser(login: String, pass: String): Boolean {
+    fun isLoginPasswordExist(login: String, pass: String): Boolean {
         users.forEach { i ->
             if (i.login == login && i.password == pass) {
                 return true
