@@ -1,20 +1,26 @@
-package com.example.mvp_rxjava2_dagger_moxy.mvp
+package com.example.mvp_rxjava2_dagger_moxy.login_mvp
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import com.example.mvp_rxjava2_dagger_moxy.mvp.interfaces.MainView
+import com.example.mvp_rxjava2_dagger_moxy.cicerone.AndroidScreens
+import com.example.mvp_rxjava2_dagger_moxy.cicerone.App
 import com.example.mvp_rxjava2_dagger_moxy.databinding.FragmentClicksBinding
+import com.example.mvp_rxjava2_dagger_moxy.login_mvp.interfaces.AutorizationView
+import com.google.android.material.snackbar.Snackbar
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
 
-class ClicksFragment : MvpAppCompatFragment(), MainView {
+class AutorizationFragment : MvpAppCompatFragment(), AutorizationView {
+
+    companion object {
+        fun newInstance() = AutorizationFragment()
+    }
 
     private val presenter by moxyPresenter {
-        Presenter()
+        AutorizationPresenter(App.instance.router, AndroidScreens())
     }
     private var _binding: FragmentClicksBinding? = null
     private val binding get() = _binding!!
@@ -37,35 +43,18 @@ class ClicksFragment : MvpAppCompatFragment(), MainView {
         _binding = null
     }
 
-    fun init() {
-        binding.apply {
-            presenter.apply {
-                btnClickOne.setOnClickListener {
-                    counterClickOne()
-                }
-                btnClickTwo.setOnClickListener {
-                    counterClickTwo()
-                }
-
-                btnClickThree.setOnClickListener {
-                    counterClickThree()
-                }
-            }
-
+    override fun init() {
+        binding.btnCheckIn.setOnClickListener {
+            presenter.checkPass(
+                binding.txtLogin.text.toString(),
+                binding.txtPassword.text.toString()
+            )
         }
-
     }
 
-    override fun setBtnTextOne(text: String) {
-        binding.btnClickTextOne.text = text
+    override fun messageInfo(message: String) {
+        view?.let { Snackbar.make(it.rootView, message, Snackbar.LENGTH_LONG).show() }
     }
 
-    override fun setBtnTextTwo(text: String) {
-        binding.btnClickTextTwo.text = text
-    }
-
-    override fun setBtnTextThree(text: String) {
-        binding.btnClickTextThree.text = text
-    }
 
 }
