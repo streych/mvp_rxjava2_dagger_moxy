@@ -1,5 +1,7 @@
 package com.example.mvp_rxjava2_dagger_moxy.data
 
+import io.reactivex.rxjava3.core.Observable
+
 class UsersRepo {
     private val users = listOf(
         Users("Atos","1"),
@@ -7,12 +9,12 @@ class UsersRepo {
         Users("Parovoz","654321")
     )
 
-    fun getUser(login: String, pass: String): Boolean {
+    fun isLoginPasswordExist(login: String, pass: String): Observable<Boolean> {
         users.forEach { i ->
             if (i.login == login && i.password == pass) {
-                return true
+                return Observable.just(true)
             }
         }
-        return false
+        return Observable.just(false)
     }
 }

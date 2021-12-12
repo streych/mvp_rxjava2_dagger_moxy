@@ -12,21 +12,24 @@ class AutorizationPresenter(private val router: Router, private val screens: ISc
 
     private val model = UsersRepo()
 
-    private fun goToSingIn(login: Users) {
-        router.replaceScreen(screens.singInFragment(login))
+    private fun goToSingIn(user: Users) {
+        router.replaceScreen(screens.singInFragment(user))
     }
 
     fun checkPass(login: String, password: String) {
         if (login.isEmpty() || password.isEmpty()) {
             viewState.messageInfo("Где логин / пароль")
         } else {
-            val unswer = model.getUser(login, password)
-            if (unswer) {
-                val user = Users(login, password)
-                goToSingIn(user)
-            } else {
-                viewState.messageInfo("Попробуйте снова")
-            }
+           model.isLoginPasswordExist(login, password).subscribe({validate ->
+               if (validate) {
+                   val user = Users(login, password)
+                   goToSingIn(user)
+               } else {
+                   viewState.messageInfo("Попробуйте снова")
+               }
+            }, {
+
+            })
         }
 
     }

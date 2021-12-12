@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.mvp_rxjava2_dagger_moxy.cicerone.AndroidScreens
 import com.example.mvp_rxjava2_dagger_moxy.cicerone.App
-import com.example.mvp_rxjava2_dagger_moxy.databinding.FragmentClicksBinding
+import com.example.mvp_rxjava2_dagger_moxy.databinding.FragmentAutorizationBinding
 import com.example.mvp_rxjava2_dagger_moxy.login_mvp.interfaces.AutorizationView
 import com.google.android.material.snackbar.Snackbar
 import moxy.MvpAppCompatFragment
@@ -22,14 +22,14 @@ class AutorizationFragment : MvpAppCompatFragment(), AutorizationView {
     private val presenter by moxyPresenter {
         AutorizationPresenter(App.instance.router, AndroidScreens())
     }
-    private var _binding: FragmentClicksBinding? = null
+    private var _binding: FragmentAutorizationBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentClicksBinding.inflate(inflater, container, false)
+        _binding = FragmentAutorizationBinding.inflate(inflater, container, false)
         return binding.root
     }
 
