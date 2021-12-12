@@ -9,10 +9,10 @@ import com.example.mvp_rxjava2_dagger_moxy.databinding.FragmentRightPasswordBind
 import moxy.MvpAppCompatFragment
 
 class RightPasswordFragment : MvpAppCompatFragment() {
-
+    
     companion object {
         //переменная  для Bundle
-        val BUNDLE_EXTRA = "user"
+        const val BUNDLE_EXTRA = "user"
         fun newInstance(bundle: Bundle): RightPasswordFragment {
             val fragment = RightPasswordFragment()
             fragment.arguments = bundle
@@ -20,7 +20,9 @@ class RightPasswordFragment : MvpAppCompatFragment() {
         }
     }
 
-
+    private val loginBundle: Users by lazy {
+        arguments?.getParcelable(BUNDLE_EXTRA) ?: Users()
+    }
     private var _binding: FragmentRightPasswordBinding? = null
     private val binding get() = _binding!!
 
@@ -34,7 +36,7 @@ class RightPasswordFragment : MvpAppCompatFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val loginBundle: Users = arguments?.getParcelable(BUNDLE_EXTRA) ?: Users()
+
         binding.loginRP.text = loginBundle.login
     }
 
