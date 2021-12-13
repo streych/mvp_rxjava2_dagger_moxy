@@ -13,10 +13,12 @@ class RightPasswordFragment : MvpAppCompatFragment() {
     companion object {
         //переменная  для Bundle
         const val BUNDLE_EXTRA = "user"
-        fun newInstance(bundle: Bundle): RightPasswordFragment {
-            val fragment = RightPasswordFragment()
-            fragment.arguments = bundle
-            return fragment
+        fun newInstance(user: Users): RightPasswordFragment {
+            val myFragment = RightPasswordFragment()
+            val args = Bundle()
+            args.putParcelable(BUNDLE_EXTRA, user)
+            myFragment.arguments = args
+            return myFragment
         }
     }
 
@@ -36,7 +38,6 @@ class RightPasswordFragment : MvpAppCompatFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding.loginRP.text = loginBundle.login
     }
 
