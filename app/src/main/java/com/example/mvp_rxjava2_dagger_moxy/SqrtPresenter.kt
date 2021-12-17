@@ -1,37 +1,34 @@
 package com.example.mvp_rxjava2_dagger_moxy
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import io.reactivex.rxjava3.subjects.BehaviorSubject
+import moxy.MvpPresenter
 import kotlin.math.pow
 
-class SqrtPresenter(val view: SqrtView) {
+class SqrtPresenter(): MvpPresenter<SqrtView>() {
 
     private var model = Model()
+    private val behaviorSubject = BehaviorSubject.create<Int>()
 
-    private fun getSqrt() {
-        view.setShowNumber(model.getNumber().toString())
+    fun getSqrt() {
+        viewState.setShowNumber(model.getNumber().toString())
     }
 
     fun setSqrt() {
-        if (view.getShowNumber().isNullOrEmpty()) {
-            view.messageInfo()
+
+        if (viewState.getShowNumber() == null) {
+            viewState.messageInfo()
         } else {
-            val someInt: Int = view.getShowNumber().toString().toInt()
-            val behaviorSubject = BehaviorSubject.create<Int>()
+            val someInt: Int = viewState.toString().toInt()
+            behaviorSubject.subscribeOn(Schedulers.computation())
             behaviorSubject.onNext(someInt)
-            behaviorSubject.subscribeOn(Schedulers.io()) //ждем ввода пользователя
-            behaviorSubject.observeOn(Schedulers.computation()) //так как возведение в квадрат сложная
-            // операция и чем больше число тем больше нагрузка
-            behaviorSubject.subscribe({
+            behaviorSubject.map {
                 model.setNumber(it.toDouble().pow(2).toInt())
-                getSqrt()
-            }, {
-
-            })
-            //баг если пустое значение падает
-            Thread.sleep(5000)
+            }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe()
         }
-
     }
 
 }

@@ -2,7 +2,6 @@ package com.example.mvp_rxjava2_dagger_moxy
 
 import android.os.Bundle
 import com.example.mvp_rxjava2_dagger_moxy.databinding.ActivityMainBinding
-import com.github.terrakok.cicerone.Cicerone
 import moxy.MvpAppCompatActivity
 
 class MainActivity : MvpAppCompatActivity() {

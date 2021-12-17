@@ -8,10 +8,13 @@ import android.view.ViewGroup
 import com.example.mvp_rxjava2_dagger_moxy.databinding.FragmentSqrtBinding
 import com.google.android.material.snackbar.Snackbar
 import moxy.MvpAppCompatFragment
+import moxy.ktx.moxyPresenter
 
 class SqrtFragment : MvpAppCompatFragment(), SqrtView {
     private var binding: FragmentSqrtBinding? = null
-    private val presenter = SqrtPresenter(this)
+    private val presenter by moxyPresenter {
+        SqrtPresenter()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,8 +28,8 @@ class SqrtFragment : MvpAppCompatFragment(), SqrtView {
         super.onViewCreated(view, savedInstanceState)
 
         binding?.sqrtBtn?.setOnClickListener {
-
             presenter.setSqrt()
+            presenter.getSqrt()
         }
     }
 
@@ -37,7 +40,7 @@ class SqrtFragment : MvpAppCompatFragment(), SqrtView {
 
     private fun String.toEditable(): Editable = Editable.Factory.getInstance().newEditable(this)
 
-    override fun getShowNumber(): Editable? {
+     override fun getShowNumber(): Editable? {
         return binding?.textSqrt?.text
     }
 

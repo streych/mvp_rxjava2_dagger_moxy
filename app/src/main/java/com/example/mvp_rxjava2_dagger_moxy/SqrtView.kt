@@ -5,7 +5,8 @@ import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
-interface SqrtView {
+@StateStrategyType(AddToEndSingleStrategy::class)
+interface SqrtView: MvpView {
 
     fun getShowNumber(): Editable?
     fun setShowNumber(string: String)
