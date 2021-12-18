@@ -1,4 +1,4 @@
-package com.example.mvp_rxjava2_dagger_moxy.app
+package com.example.mvp_rxjava2_dagger_moxy.cicerone
 import android.app.Application
 import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.Router

@@ -1,11 +1,11 @@
-package com.example.mvp_rxjava2_dagger_moxy.recycler_adapter
+package com.example.mvp_rxjava2_dagger_moxy.mvpusers
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mvp_rxjava2_dagger_moxy.databinding.GitUsersItemBinding
-import com.example.mvp_rxjava2_dagger_moxy.mvp.users_mvp.presenter.interfaces.IUserListPresenter
-import com.example.mvp_rxjava2_dagger_moxy.mvp.users_mvp.presenter.interfaces.UserItemView
+import com.example.mvp_rxjava2_dagger_moxy.interfaces.IUserListPresenter
+import com.example.mvp_rxjava2_dagger_moxy.interfaces.UserItemView
 
 class UsersRVAdapter(val presenter: IUserListPresenter) :
     RecyclerView.Adapter<UsersRVAdapter.ViewHolder>() {
@@ -26,7 +26,7 @@ class UsersRVAdapter(val presenter: IUserListPresenter) :
                 presenter.itemClickListener?.invoke(this)
             } }
 
-    override fun onBindViewHolder(holder: UsersRVAdapter.ViewHolder, position: Int) =
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) =
         presenter.bindView(holder.apply { pos = position })
 
     override fun getItemCount() = presenter.getCount()

@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".MainActivity">
+    tools:context=".mvpmain.MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_users"

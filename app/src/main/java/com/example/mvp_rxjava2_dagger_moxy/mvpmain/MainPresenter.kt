@@ -1,7 +1,6 @@
-package com.example.mvp_rxjava2_dagger_moxy.mvp.users_mvp.presenter
+package com.example.mvp_rxjava2_dagger_moxy.mvpmain
 
-import com.example.mvp_rxjava2_dagger_moxy.mvp.users_mvp.presenter.interfaces.IScreens
-import com.example.mvp_rxjava2_dagger_moxy.mvp.users_mvp.presenter.interfaces.MainView
+import com.example.mvp_rxjava2_dagger_moxy.cicerone.IScreens
 import com.github.terrakok.cicerone.Router
 import moxy.MvpPresenter
 

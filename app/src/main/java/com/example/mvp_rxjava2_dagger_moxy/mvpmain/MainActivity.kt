@@ -1,12 +1,11 @@
-package com.example.mvp_rxjava2_dagger_moxy
+package com.example.mvp_rxjava2_dagger_moxy.mvpmain
 
 import android.os.Bundle
-import com.example.mvp_rxjava2_dagger_moxy.app.App
+import com.example.mvp_rxjava2_dagger_moxy.R
+import com.example.mvp_rxjava2_dagger_moxy.cicerone.App
 import com.example.mvp_rxjava2_dagger_moxy.cicerone.AndroidScreens
 import com.example.mvp_rxjava2_dagger_moxy.databinding.ActivityMainBinding
-import com.example.mvp_rxjava2_dagger_moxy.mvp.users_mvp.presenter.interfaces.BackButtonListener
-import com.example.mvp_rxjava2_dagger_moxy.mvp.users_mvp.presenter.interfaces.MainView
-import com.example.mvp_rxjava2_dagger_moxy.mvp.users_mvp.presenter.MainPresenter
+import com.example.mvp_rxjava2_dagger_moxy.interfaces.BackButtonListener
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter

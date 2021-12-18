@@ -1,4 +1,4 @@
-package com.example.mvp_rxjava2_dagger_moxy.mvp.users_mvp.presenter.interfaces
+package com.example.mvp_rxjava2_dagger_moxy.interfaces
 
 interface IListPresenter<V : IItemView> {
     var itemClickListener: ((V) -> Unit)?

@@ -1,8 +1,6 @@
-package com.example.mvp_rxjava2_dagger_moxy.mvp.users_mvp.presenter
+package com.example.mvp_rxjava2_dagger_moxy.mvpusers
 
-import com.example.mvp_rxjava2_dagger_moxy.mvp.users_mvp.presenter.interfaces.IScreens
-import com.example.mvp_rxjava2_dagger_moxy.mvp.users_mvp.presenter.interfaces.MainView
-import com.example.mvp_rxjava2_dagger_moxy.mvp.users_mvp.presenter.interfaces.UsersView
+import com.example.mvp_rxjava2_dagger_moxy.cicerone.IScreens
 import com.example.mvp_rxjava2_dagger_moxy.repo.GithubUsersRepo
 import com.github.terrakok.cicerone.Router
 import moxy.MvpPresenter
@@ -17,7 +15,8 @@ class UsersPresenter(val router: Router, val screen: IScreens) : MvpPresenter<Us
         viewState.init()
         loadData()
         usersListPresenter.itemClickListener = { userItemView ->
-
+            val user = usersListPresenter.users[userItemView.pos]
+            router.navigateTo(screen.user(user))
         }
     }
 
