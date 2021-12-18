@@ -3,5 +3,8 @@
     <string name="one">one</string>
     <string name="two">two</string>
     <string name="three">three</string>
+    <string name="id">My ID</string>
     <string name="user_login">User Login</string>
+    <string name="user_html_url">My Html Url</string>
+    <string name="user_node_id">My Node Id</string>
 </resources>

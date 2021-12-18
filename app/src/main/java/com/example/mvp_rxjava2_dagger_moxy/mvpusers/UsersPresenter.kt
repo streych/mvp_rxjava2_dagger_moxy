@@ -1,12 +1,18 @@
 package com.example.mvp_rxjava2_dagger_moxy.mvpusers
 
 import com.example.mvp_rxjava2_dagger_moxy.cicerone.IScreens
-import com.example.mvp_rxjava2_dagger_moxy.repo.GithubUsersRepo
+import com.example.mvp_rxjava2_dagger_moxy.retrofit.IGithubUsersRepo
 import com.github.terrakok.cicerone.Router
+import io.reactivex.rxjava3.core.Scheduler
+import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
 
-class UsersPresenter(val router: Router, val screen: IScreens) : MvpPresenter<UsersView>() {
-    private val usersRepo =  GithubUsersRepo()
+class UsersPresenter(
+    val uiScheduler: Scheduler,
+    val usersRepos: IGithubUsersRepo,
+    val router: Router,
+    val screen: IScreens) :
+    MvpPresenter<UsersView>() {
     val usersListPresenter = UsersListPresenter()
 
 
@@ -21,9 +27,17 @@ class UsersPresenter(val router: Router, val screen: IScreens) : MvpPresenter<Us
     }
 
     private fun loadData() {
-        val users = usersRepo.getUsers()
-        usersListPresenter.users.addAll(users)
-        viewState.updateList()
+        usersRepos.getUsers()
+            .subscribeOn(Schedulers.io())
+            .observeOn(uiScheduler)
+            .subscribe({ repos ->
+                usersListPresenter.users.clear()
+                usersListPresenter.users.addAll(repos)
+                viewState.updateList()
+            },
+                {
+                    println("Error: ${it.message}")
+                })
     }
 
     fun backPressed(): Boolean {

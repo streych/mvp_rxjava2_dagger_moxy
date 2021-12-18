@@ -2,17 +2,24 @@ package com.example.mvp_rxjava2_dagger_moxy.mvpusers
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mvp_rxjava2_dagger_moxy.databinding.GitUsersItemBinding
+import com.example.mvp_rxjava2_dagger_moxy.glide.GlideImageLoader
+import com.example.mvp_rxjava2_dagger_moxy.glide.IImageLoader
 import com.example.mvp_rxjava2_dagger_moxy.interfaces.IUserListPresenter
 import com.example.mvp_rxjava2_dagger_moxy.interfaces.UserItemView
 
-class UsersRVAdapter(val presenter: IUserListPresenter) :
+class UsersRVAdapter(val presenter: IUserListPresenter, val imageLoader: IImageLoader<ImageView>) :
     RecyclerView.Adapter<UsersRVAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: GitUsersItemBinding) : RecyclerView.ViewHolder(binding.root),
         UserItemView {
         override fun setLogin(text: String) { binding.tvLogin.text = text }
+        override fun loadAvatar(url: String) {
+            imageLoader.loadInto(url, binding.ivAvatar)
+        }
+
 
         override var pos = -1
 

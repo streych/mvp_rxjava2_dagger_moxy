@@ -4,18 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.mvp_rxjava2_dagger_moxy.cicerone.AndroidScreens
-import com.example.mvp_rxjava2_dagger_moxy.cicerone.App
 import com.example.mvp_rxjava2_dagger_moxy.databinding.FragmentUserBinding
 import com.example.mvp_rxjava2_dagger_moxy.repo.GithubUser
+import com.example.mvp_rxjava2_dagger_moxy.retrofit.ApiHolder
+import com.example.mvp_rxjava2_dagger_moxy.retrofit.RetrofitGithubUsersRepo
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
 class UserFragment : MvpAppCompatFragment(), UserView {
     var binding: FragmentUserBinding? = null
+    private val userBundle: GithubUser by lazy {
+        arguments?.getParcelable(BUNDLE_USER) ?: GithubUser()
+    }
 
     val presenter by moxyPresenter {
-        UserPresenter(App.instance.router, AndroidScreens())
+        UserPresenter(userBundle.login.toString(), RetrofitGithubUsersRepo(ApiHolder.api))
     }
 
     companion object {
@@ -29,9 +32,6 @@ class UserFragment : MvpAppCompatFragment(), UserView {
         }
     }
 
-    private val userBundle: GithubUser by lazy {
-        arguments?.getParcelable(BUNDLE_USER) ?: GithubUser()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,10 +40,11 @@ class UserFragment : MvpAppCompatFragment(), UserView {
         binding = it
     }.root
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding?.login?.text = userBundle.login
+    override fun getFollowers(id: String, login: String, node: String, html: String) {
+        binding?.id?.text = id
+        binding?.node?.text = node
+        binding?.login?.text = login
+        binding?.htmlUrl?.text = html
     }
-
 
 }

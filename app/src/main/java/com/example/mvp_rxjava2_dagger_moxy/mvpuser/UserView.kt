@@ -6,5 +6,5 @@ import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(AddToEndSingleStrategy::class)
 interface UserView: MvpView {
-
+    fun getFollowers(id: String, login: String, node: String, html: String)
 }
