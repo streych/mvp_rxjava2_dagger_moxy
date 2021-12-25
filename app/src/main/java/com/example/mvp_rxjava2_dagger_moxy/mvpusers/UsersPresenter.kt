@@ -27,6 +27,7 @@ class UsersPresenter(
     }
 
     private fun loadData() {
+
         usersRepos.getUsers()
             .subscribeOn(Schedulers.io())
             .observeOn(uiScheduler)

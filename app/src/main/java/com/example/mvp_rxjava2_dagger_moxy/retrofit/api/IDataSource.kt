@@ -1,4 +1,4 @@
-package com.example.mvp_rxjava2_dagger_moxy.retrofit
+package com.example.mvp_rxjava2_dagger_moxy.retrofit.api
 
 import com.example.mvp_rxjava2_dagger_moxy.repo.GithubUser
 import io.reactivex.rxjava3.core.Single

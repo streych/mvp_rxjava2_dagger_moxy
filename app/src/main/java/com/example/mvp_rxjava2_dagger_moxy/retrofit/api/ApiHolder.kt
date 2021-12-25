@@ -1,7 +1,10 @@
-package com.example.mvp_rxjava2_dagger_moxy.retrofit
+package com.example.mvp_rxjava2_dagger_moxy.retrofit.api
 
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import okhttp3.logging.HttpLoggingInterceptor.Level
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -16,10 +19,18 @@ object ApiHolder {
 
         Retrofit.Builder()
             .baseUrl("https://api.github.com")
-            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+            .client(
+                OkHttpClient.Builder()
+                    .addNetworkInterceptor(
+                        HttpLoggingInterceptor().apply {
+                            level = Level.BODY
+                        }
+                    )
+                    .build()
+            )
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.createSynchronous())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(IDataSource::class.java)
     }
-
 }

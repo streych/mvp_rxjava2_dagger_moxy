@@ -2,11 +2,10 @@ package com.example.mvp_rxjava2_dagger_moxy.mvpuser
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import com.example.mvp_rxjava2_dagger_moxy.databinding.FragmentUserBinding
 import com.example.mvp_rxjava2_dagger_moxy.repo.GithubUser
-import com.example.mvp_rxjava2_dagger_moxy.retrofit.ApiHolder
+import com.example.mvp_rxjava2_dagger_moxy.retrofit.api.ApiHolder
 import com.example.mvp_rxjava2_dagger_moxy.retrofit.RetrofitGithubUsersRepo
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter

@@ -11,7 +11,7 @@ import com.example.mvp_rxjava2_dagger_moxy.cicerone.AndroidScreens
 import com.example.mvp_rxjava2_dagger_moxy.databinding.FragmentUsersBinding
 import com.example.mvp_rxjava2_dagger_moxy.glide.GlideImageLoader
 import com.example.mvp_rxjava2_dagger_moxy.interfaces.BackButtonListener
-import com.example.mvp_rxjava2_dagger_moxy.retrofit.ApiHolder
+import com.example.mvp_rxjava2_dagger_moxy.retrofit.api.ApiHolder
 import com.example.mvp_rxjava2_dagger_moxy.retrofit.RetrofitGithubUsersRepo
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
