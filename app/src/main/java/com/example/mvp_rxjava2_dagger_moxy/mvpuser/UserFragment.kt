@@ -48,11 +48,11 @@ class UserFragment : MvpAppCompatFragment(), UserView {
         binding = it
     }.root
 
-    override fun getFollowers(id: String, login: String, node: String, html: String) {
-        binding?.id?.text = id
-        binding?.node?.text = node
-        binding?.login?.text = login
-        binding?.htmlUrl?.text = html
+    override fun getFollowers(user: GithubUser) {
+        binding?.id?.text = user.id
+        binding?.node?.text = user.node_id
+        binding?.login?.text = user.login
+        binding?.htmlUrl?.text = user.html_url
     }
 
 }

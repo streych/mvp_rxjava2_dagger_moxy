@@ -47,6 +47,16 @@ class RetrofitGithubUsersRepo(
         }
 
 
-        override fun getUser(userLogin: String): Single<GithubUser>  = api.loadUser(userLogin)
-
+    override fun getUser(userLogin: String):  Single<List<GithubUser>> = Single.fromCallable {
+        db.userDao.findForUser(userLogin).map { roomUser ->
+            GithubUser(
+                roomUser.id,
+                roomUser.login,
+                roomUser.avatarUrl,
+                roomUser.node_id,
+                roomUser.html_url
+            )
+        }
+    }.subscribeOn(Schedulers.io())
 }
+

@@ -26,9 +26,6 @@ interface UserDao {
     @Update
     fun update(users: List<GithubUser>)
 
-
-//    @Query("SELECT * FROM GitHubUserTable WHERE login LIKE :login LIMIT 1")
-//    fun getUserByLogin(login: String): Single<GitHubUser>
     @Query("SELECT * FROM GitHubUserTable WHERE login = :login")
     fun findForUser(login: String): List<GithubUser>
 
