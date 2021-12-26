@@ -2,12 +2,13 @@ package com.example.mvp_rxjava2_dagger_moxy.mvpuser
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import com.example.mvp_rxjava2_dagger_moxy.databinding.FragmentUserBinding
 import com.example.mvp_rxjava2_dagger_moxy.repo.GithubUser
 import com.example.mvp_rxjava2_dagger_moxy.retrofit.ApiHolder
 import com.example.mvp_rxjava2_dagger_moxy.retrofit.RetrofitGithubUsersRepo
+import com.example.mvp_rxjava2_dagger_moxy.room.AndroidNetworkStatus
+import com.example.mvp_rxjava2_dagger_moxy.room.Database
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
@@ -18,7 +19,14 @@ class UserFragment : MvpAppCompatFragment(), UserView {
     }
 
     val presenter by moxyPresenter {
-        UserPresenter(userBundle.login.toString(), RetrofitGithubUsersRepo(ApiHolder.api))
+        UserPresenter(
+            userBundle.login.toString(), RetrofitGithubUsersRepo(
+                ApiHolder.api, AndroidNetworkStatus(
+                    requireContext()
+                ),
+                Database.getInstance()
+            )
+        )
     }
 
     companion object {

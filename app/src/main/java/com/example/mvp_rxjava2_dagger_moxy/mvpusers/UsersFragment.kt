@@ -13,22 +13,23 @@ import com.example.mvp_rxjava2_dagger_moxy.glide.GlideImageLoader
 import com.example.mvp_rxjava2_dagger_moxy.interfaces.BackButtonListener
 import com.example.mvp_rxjava2_dagger_moxy.retrofit.ApiHolder
 import com.example.mvp_rxjava2_dagger_moxy.retrofit.RetrofitGithubUsersRepo
+import com.example.mvp_rxjava2_dagger_moxy.room.AndroidNetworkStatus
+import com.example.mvp_rxjava2_dagger_moxy.room.Database
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
 
 class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
 
-    val presenter: UsersPresenter by moxyPresenter {
+    private val presenter: UsersPresenter by moxyPresenter {
         UsersPresenter(
             AndroidSchedulers.mainThread(),
-            RetrofitGithubUsersRepo(ApiHolder.api),
+            RetrofitGithubUsersRepo(ApiHolder.api, AndroidNetworkStatus(requireContext()), Database.getInstance()),
             App.instance.router, AndroidScreens(),
         )
     }
     private var adapter: UsersRVAdapter? = null
     private var binding: FragmentUsersBinding? = null
-
 
     companion object {
         fun newInstance() = UsersFragment()
