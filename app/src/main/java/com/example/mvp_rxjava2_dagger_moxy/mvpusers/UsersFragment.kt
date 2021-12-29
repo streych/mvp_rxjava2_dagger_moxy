@@ -15,21 +15,24 @@ import com.example.mvp_rxjava2_dagger_moxy.retrofit.ApiHolder
 import com.example.mvp_rxjava2_dagger_moxy.retrofit.RetrofitGithubUsersRepo
 import com.example.mvp_rxjava2_dagger_moxy.room.AndroidNetworkStatus
 import com.example.mvp_rxjava2_dagger_moxy.room.Database
+import com.github.terrakok.cicerone.Router
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
+import javax.inject.Inject
 
 
 class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
 
     private val presenter: UsersPresenter by moxyPresenter {
-        UsersPresenter(
-            AndroidSchedulers.mainThread(),
-            RetrofitGithubUsersRepo(ApiHolder.api, AndroidNetworkStatus(requireContext()), Database.getInstance()),
-            App.instance.router, AndroidScreens(),
-        )
+        UsersPresenter().apply {
+            App.instance.component.inject(this)
+        }
     }
+
     private var adapter: UsersRVAdapter? = null
     private var binding: FragmentUsersBinding? = null
+    @Inject
+    var router: Router? = null
 
     companion object {
         fun newInstance() = UsersFragment()
